@@ -18,6 +18,10 @@
   margin-top: 20px;
 }
 
+.daily .day:hover {
+  background: #bbb;
+}
+
 .daily .date {
   font-size: var(--big-font-size);
   line-height: 1.1em;
@@ -63,4 +67,9 @@
 
 .daily .temp-max {
   align-self: self-end;
+}
+
+.daily .back {
+  width: 100%;
+  height: 2.3em;
 }

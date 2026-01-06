@@ -1,11 +1,14 @@
 import { convertToCelsius } from "./utility.js";
+import { generateHourlyView } from "./hourly.js";
 import "./daily.css";
 
 export function loadDaily(data) {
   const { days } = data;
-  const root = document.createElement("ul");
 
+  const root = document.createElement("ul");
   root.classList.add("daily");
+
+  let dayElements = [];
 
   for (const day of days) {
     const date = new Date(day.datetimeEpoch * 1000);
@@ -38,6 +41,10 @@ export function loadDaily(data) {
     const pTempMax = document.createElement("p");
     const spanTempAvgLabel = document.createElement("span");
     const spanTempMinMaxLabel = document.createElement("span");
+
+    const btnBack = document.createElement("button");
+    btnBack.classList.add("back");
+
     divTemps.append(
       spanTempAvgLabel,
       pTempAvg,
@@ -61,6 +68,7 @@ export function loadDaily(data) {
     pTempAvg.append(convertToCelsius(tempavg) + "°");
     pTempMin.append(convertToCelsius(tempmin) + "°");
     pTempMax.append(convertToCelsius(tempmax) + "°");
+    btnBack.append("←   Back");
 
     import(`./assets/${icon}.svg`)
       .then((file) => {
@@ -85,6 +93,17 @@ export function loadDaily(data) {
     pTempMin.classList.add("temp-min");
     pTempMax.classList.add("temp-max");
 
+    function addHourly() {
+      const hourlyView = generateHourlyView(day.hours);
+      root.replaceChildren(btnBack, this, hourlyView);
+    }
+    function returnDaily() {
+      root.replaceChildren(...dayElements);
+    }
+    dayContainer.addEventListener("click", addHourly);
+    btnBack.addEventListener("click", returnDaily);
+
+    dayElements.push(dayContainer);
     dayContainer.append(divDateMonth, imgIcon, divTexts, divTemps);
     root.append(dayContainer);
   }
