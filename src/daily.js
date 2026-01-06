@@ -2,13 +2,14 @@ import { convertToCelsius } from "./utility.js";
 import { generateHourlyView } from "./hourly.js";
 import "./daily.css";
 
+const root = document.createElement("ul");
+root.classList.add("daily");
+
 export function loadDaily(data) {
   const { days } = data;
-
-  const root = document.createElement("ul");
-  root.classList.add("daily");
-
   let dayElements = [];
+
+  root.replaceChildren();
 
   for (const day of days) {
     const date = new Date(day.datetimeEpoch * 1000);
@@ -113,5 +114,5 @@ export function loadDaily(data) {
     root.append(dayContainer);
   }
 
-  document.body.append(root);
+  if (!root.parentElement) document.body.append(root);
 }

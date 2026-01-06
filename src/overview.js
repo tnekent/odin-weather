@@ -26,7 +26,6 @@ spanSeparator.classList.add("separator");
 divWeatherText.append(pTempCurrent, spanSeparator, pConditionCurrent);
 
 divOverview.append(headerLoc, imgIcon, divWeatherText);
-document.body.append(divOverview);
 
 export function loadOverview(data) {
   const { resolvedAddress } = data;
@@ -42,4 +41,6 @@ export function loadOverview(data) {
 
   // Have to convert from Fahrenheit to Celsuis then round it to integer
   pTempCurrent.textContent = convertToCelsius(temp) + "°C";
+
+  if (!divOverview.parentElement) document.body.append(divOverview);
 }

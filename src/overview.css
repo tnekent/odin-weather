@@ -1,13 +1,25 @@
 body {
   min-height: 100vh;
-  display: flex;
+  padding: 20px;
+  display: grid;
+  grid-template-areas:
+    "search search"
+    "overview daily";
+  grid-template-columns: 2fr 3fr;
   gap: 50px;
-  justify-content: center;
-  align-items: center;
   font-family: Arial, Helvetica, sans-serif;
 }
 
+body.initial {
+  grid-template-areas: "search";
+  grid-template-columns: 100%;
+  gap: 0;
+  align-items: center;
+  justify-content: center;
+}
+
 .overview {
+  grid-area: overview;
   display: flex;
   flex-direction: column;
   align-items: center;
