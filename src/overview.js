@@ -12,6 +12,7 @@ export function loadOverview(data) {
   const { conditions, icon, temp } = data.currentConditions;
   pLocation.textContent = resolvedAddress;
   pConditionCurrent.textContent = conditions;
+
   import(`./assets/${icon}.svg`)
     .then((file) => {
       imgIcon.src = file.default;

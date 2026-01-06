@@ -1,6 +1,7 @@
 body {
   min-height: 100vh;
   display: flex;
+  gap: 50px;
   justify-content: center;
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
@@ -25,4 +26,22 @@ body {
 
 .overview .icon {
   width: 300px;
+}
+
+.overview .weather-text {
+  display: flex;
+  gap: 20px;
+  height: 2.5em;
+  align-items: center;
+}
+
+.overview .temp {
+  font-size: 2em;
+}
+
+.overview .separator {
+  display: inline-block;
+  width: 3px;
+  height: 100%;
+  background-color: black;
 }
