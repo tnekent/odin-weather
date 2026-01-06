@@ -18,7 +18,7 @@
   margin-top: 20px;
 }
 
-.daily .day:hover {
+.daily .day.hover:hover {
   background: #bbb;
 }
 

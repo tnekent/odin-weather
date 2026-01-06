@@ -76,7 +76,7 @@ export function loadDaily(data) {
       })
       .catch(alert);
 
-    dayContainer.classList.add("day");
+    dayContainer.classList.add("day", "hover");
 
     divDateMonth.classList.add("date-month");
     pMonth.classList.add("month");
@@ -95,12 +95,17 @@ export function loadDaily(data) {
 
     function addHourly() {
       const hourlyView = generateHourlyView(day.hours);
-      root.replaceChildren(btnBack, this, hourlyView);
-    }
-    function returnDaily() {
-      root.replaceChildren(...dayElements);
+      dayContainer.classList.remove("hover");
+      dayContainer.removeEventListener("click", addHourly);
+      root.replaceChildren(btnBack, dayContainer, hourlyView);
     }
     dayContainer.addEventListener("click", addHourly);
+
+    function returnDaily() {
+      dayContainer.addEventListener("click", addHourly);
+      dayContainer.classList.add("hover");
+      root.replaceChildren(...dayElements);
+    }
     btnBack.addEventListener("click", returnDaily);
 
     dayElements.push(dayContainer);
