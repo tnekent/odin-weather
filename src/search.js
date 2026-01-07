@@ -10,12 +10,16 @@ btnConfirm.textContent = "Search";
 
 inputSearch.placeholder = "Search location...";
 
-export function getQuery(queryCb) {
-  document.body.append(divSearch);
-
-  btnConfirm.addEventListener("click", () => {
-    if (inputSearch.value) {
-      queryCb(inputSearch.value);
-    }
-  });
+function onQuery(queryCb, once = false) {
+  btnConfirm.addEventListener(
+    "click",
+    () => {
+      if (inputSearch.value) {
+        queryCb(inputSearch.value);
+      }
+    },
+    { once },
+  );
 }
+
+export { divSearch as domSearch, onQuery };

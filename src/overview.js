@@ -27,7 +27,7 @@ divWeatherText.append(pTempCurrent, spanSeparator, pConditionCurrent);
 
 divOverview.append(headerLoc, imgIcon, divWeatherText);
 
-export function loadOverview(data) {
+function updateOverview(data) {
   const { resolvedAddress } = data;
   const { conditions, icon, temp } = data.currentConditions;
   pLocName.textContent = resolvedAddress;
@@ -41,6 +41,6 @@ export function loadOverview(data) {
 
   // Have to convert from Fahrenheit to Celsuis then round it to integer
   pTempCurrent.textContent = convertToCelsius(temp) + "°C";
-
-  if (!divOverview.parentElement) document.body.append(divOverview);
 }
+
+export { divOverview as domOverview, updateOverview };

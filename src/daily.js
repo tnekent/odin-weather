@@ -5,7 +5,7 @@ import "./daily.css";
 const root = document.createElement("ul");
 root.classList.add("daily");
 
-export function loadDaily(data) {
+function updateDaily(data) {
   const { days } = data;
   let dayElements = [];
 
@@ -114,5 +114,7 @@ export function loadDaily(data) {
     root.append(dayContainer);
   }
 
-  if (!root.parentElement) document.body.append(root);
+  return root;
 }
+
+export { root as domDaily, updateDaily };

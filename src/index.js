@@ -1,6 +1,6 @@
-import { loadOverview } from "./overview.js";
-import { loadDaily } from "./daily.js";
-import { getQuery } from "./search.js";
+import { domOverview, updateOverview } from "./overview.js";
+import { domDaily, updateDaily } from "./daily.js";
+import { domSearch, onQuery } from "./search.js";
 import "./reset.css";
 
 const VC_KEY = "KGX6UFJV28G2DRT4M4XHNBWTL";
@@ -17,12 +17,17 @@ async function getWeatherData(location) {
 }
 
 document.body.classList.add("initial");
-getQuery((query) => {
+document.body.append(domSearch);
+
+onQuery((query) => {
   getWeatherData(query)
     .then((res) => {
-      document.body.classList.remove("initial");
-      loadOverview(res);
-      loadDaily(res);
+      updateOverview(res);
+      updateDaily(res);
     })
     .catch(console.error);
 });
+onQuery(() => {
+  document.body.append(domOverview, domDaily);
+  document.body.classList.remove("initial");
+}, true);
