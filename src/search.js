@@ -20,6 +20,12 @@ function onQuery(queryCb, once = false) {
     },
     { once },
   );
+
+  inputSearch.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && inputSearch.value) {
+      queryCb(inputSearch.value);
+    }
+  });
 }
 
 export { divSearch as domSearch, onQuery };
